@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:todo/features/home/home.dart';
 import 'package:todo/features/home/presentation/widgets/tasks_tile.dart';
-import 'package:todojo/models/tasks.dart';
-import 'package:todojo/widgets/tasks_tile.dart';
 import 'package:provider/provider.dart';
 
 class TasksList extends StatelessWidget {
+  const TasksList({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeViewModel>(
@@ -25,7 +25,7 @@ class TasksList extends StatelessWidget {
               },
             );
           },
-          itemCount: model.taskCount,
+          itemCount: model.tasks.length,
         );
       },
     );

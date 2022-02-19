@@ -45,6 +45,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                 fontSize: 30,
               ),
               TextFormField(
+                controller: _taskController,
                 autofocus: true,
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.text,
@@ -68,9 +69,6 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                   }
                   return null;
                 },
-                // onChanged: (value) {
-                //   taskTitleInput = value;
-                // },
               ),
               const Gap(10),
               TouchableOpacity(
@@ -78,7 +76,7 @@ class _AddTodoScreenState extends State<AddTodoScreen> {
                   if (_formKey.currentState!.validate()) {
                     // add
                     Provider.of<HomeViewModel>(context, listen: false)
-                        .addTask(taskTitleInput);
+                        .addTask(_taskController.text.trim());
                     Navigator.pop(context);
                   }
                 },
