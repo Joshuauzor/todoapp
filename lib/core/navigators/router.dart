@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/core/navigators/routes.dart';
+import 'package:todo/features/home/presentation/pages/home_view.dart';
 import 'package:todo/features/splash/splash.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -8,6 +9,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(
         routeName: settings.name,
         viewToShow: const SplashView(),
+      );
+
+    case Routes.homeView:
+      return _getPageRoute(
+        routeName: settings.name,
+        viewToShow: const HomeView(),
       );
 
     default:
