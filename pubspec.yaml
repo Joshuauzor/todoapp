@@ -29,6 +29,7 @@ dependencies:
   #data
   dartz: ^0.10.1
   equatable: ^2.0.3
+  observable_ish: ^3.0.1
 
   #network
   dio: ^4.0.4

@@ -1,27 +1,26 @@
+import 'package:stacked/stacked.dart';
 import 'package:todo/core/core.dart';
 import 'package:todo/features/home/home.dart';
 import 'package:todo/features/home/presentation/services/home_services.dart';
 import 'package:todo/locator.dart';
 
-class HomeViewModel extends BaseModel {
+class HomeViewModel extends ReactiveViewModel {
   final HomeService _homeService = sl<HomeService>();
 
   List<HomeModel>? get _tasks => _homeService.homeModel;
   List<HomeModel>? get tasks => _tasks;
 
-  // List<HomeModel>? homeModel;
-  // List<HomeModel>? get homeModel => _homeModel;
-
   void addTask(String taskTitle) {
     setBusy(true);
     final task = HomeModel(userId: 1, id: 1, name: taskTitle, body: 'body');
-    _tasks!.add(task);
+    _homeService.addTask(task);
     setBusy(false);
   }
 
-  void removeTask(task) {
+  void removeTask(task) async {
     setBusy(true);
-    _tasks!.remove(task);
+    // _tasks!.remove(task);
+    _homeService.removeTask(task);
     setBusy(false);
   }
 
@@ -30,6 +29,9 @@ class HomeViewModel extends BaseModel {
     task.toggleDone();
     setBusy(false);
   }
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_homeService];
 }
 
 class Task {

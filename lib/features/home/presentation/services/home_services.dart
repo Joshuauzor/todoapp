@@ -3,11 +3,19 @@ import 'package:stacked/stacked.dart';
 import 'package:todo/core/networks/api_request.dart';
 import 'package:todo/features/home/home.dart';
 import 'package:todo/locator.dart';
+import 'package:observable_ish/observable_ish.dart';
 
 abstract class HomeService with ReactiveServiceMixin {
-  List<HomeModel>? _homeModel;
-  List<HomeModel>? get homeModel => _homeModel;
+  HomeService() {
+    listenToReactiveValues([_homeModel]);
+  }
+
+  final RxValue<List<HomeModel>>? _homeModel = RxValue([]);
+  List<HomeModel>? get homeModel => _homeModel!.value;
+
   Future<void> getTasks();
+  void removeTask(task);
+  void addTask(HomeModel taskTitle);
 }
 
 class HomeServiceImpl extends HomeService {
@@ -21,11 +29,22 @@ class HomeServiceImpl extends HomeService {
       for (var item in res.data) {
         taskData.add(HomeModel.fromJson(item));
       }
-      _homeModel = taskData;
-
+      _homeModel!.value = taskData;
       notifyListeners();
     } catch (e) {
       Logger().d('$e');
     }
+  }
+
+  @override
+  void removeTask(task) {
+    _homeModel!.value.remove(task);
+    notifyListeners();
+  }
+
+  @override
+  void addTask(HomeModel task) {
+    _homeModel!.value.add(task);
+    notifyListeners();
   }
 }
