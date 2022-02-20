@@ -1,5 +1,4 @@
 import 'package:stacked/stacked.dart';
-import 'package:todo/core/core.dart';
 import 'package:todo/features/home/home.dart';
 import 'package:todo/features/home/presentation/services/home_services.dart';
 import 'package:todo/locator.dart';

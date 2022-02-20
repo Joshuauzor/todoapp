@@ -43,8 +43,8 @@ class HomeServiceImpl extends HomeService {
   }
 
   @override
-  void addTask(HomeModel task) {
-    _homeModel!.value.add(task);
+  void addTask(HomeModel taskTitle) {
+    _homeModel!.value.add(taskTitle);
     notifyListeners();
   }
 }
