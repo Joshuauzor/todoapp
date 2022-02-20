@@ -1,33 +1,37 @@
-import 'dart:collection';
+import 'package:stacked/stacked.dart';
+import 'package:todo/core/core.dart';
+import 'package:todo/features/home/home.dart';
+import 'package:todo/features/home/presentation/services/home_services.dart';
+import 'package:todo/locator.dart';
 
-import 'package:flutter/material.dart';
+class HomeViewModel extends ReactiveViewModel {
+  final HomeService _homeService = sl<HomeService>();
 
-class HomeViewModel extends ChangeNotifier {
-  // List<Task> get tasks => HomeService.tasks;
-  final List<Task> _tasks = [
-    Task(name: 'Buy Milk'),
-    Task(name: 'Buy Bread'),
-  ];
-
-  UnmodifiableListView<Task> get tasks {
-    return UnmodifiableListView(_tasks);
-  }
+  List<HomeModel>? get _tasks => _homeService.homeModel;
+  List<HomeModel>? get tasks => _tasks;
 
   void addTask(String taskTitle) {
-    final task = Task(name: taskTitle);
-    _tasks.add(task);
-    notifyListeners();
+    setBusy(true);
+    final task = HomeModel(userId: 1, id: 1, name: taskTitle, body: 'body');
+    _homeService.addTask(task);
+    setBusy(false);
   }
 
-  void removeTask(task) {
-    _tasks.remove(task);
-    notifyListeners();
+  void removeTask(task) async {
+    setBusy(true);
+    // _tasks!.remove(task);
+    _homeService.removeTask(task);
+    setBusy(false);
   }
 
-  void updateTask(Task task) {
+  void updateTask(HomeModel task) {
+    setBusy(true);
     task.toggleDone();
-    notifyListeners();
+    setBusy(false);
   }
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_homeService];
 }
 
 class Task {
