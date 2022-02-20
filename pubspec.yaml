@@ -21,6 +21,19 @@ dependencies:
 
   #state management
   provider: ^5.0.0
+  stacked: ^2.2.4
+
+  #logs
+  logger: ^1.0.0
+
+  #data
+  dartz: ^0.10.1
+  equatable: ^2.0.3
+
+  #network
+  dio: ^4.0.4
+  connectivity: ^3.0.6
+  http_parser: ^4.0.0
 
 
   cupertino_icons: ^1.0.2

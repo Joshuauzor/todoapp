@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:stacked/stacked.dart';
 import 'package:todo/features/home/home.dart';
 import 'package:todo/features/home/presentation/widgets/tasks_tile.dart';
-import 'package:provider/provider.dart';
 
 class TasksList extends StatelessWidget {
   const TasksList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeViewModel>(
+    return ViewModelBuilder<HomeViewModel>.reactive(
+      viewModelBuilder: () => HomeViewModel(),
       builder: (context, model, child) {
         return ListView.builder(
           itemBuilder: (context, index) {
-            final task = model.tasks[index];
-            // return task tiles
+            final task = model.tasks![index];
             return TaskTile(
               taskTitle: task.name,
               isChecked: task.isDone,
@@ -25,7 +25,7 @@ class TasksList extends StatelessWidget {
               },
             );
           },
-          itemCount: model.tasks.length,
+          itemCount: model.tasks!.length,
         );
       },
     );

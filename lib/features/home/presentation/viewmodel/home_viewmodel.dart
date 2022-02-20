@@ -1,32 +1,34 @@
-import 'dart:collection';
+import 'package:todo/core/core.dart';
+import 'package:todo/features/home/home.dart';
+import 'package:todo/features/home/presentation/services/home_services.dart';
+import 'package:todo/locator.dart';
 
-import 'package:flutter/material.dart';
+class HomeViewModel extends BaseModel {
+  final HomeService _homeService = sl<HomeService>();
 
-class HomeViewModel extends ChangeNotifier {
-  // List<Task> get tasks => HomeService.tasks;
-  final List<Task> _tasks = [
-    Task(name: 'Buy Milk'),
-    Task(name: 'Buy Bread'),
-  ];
+  List<HomeModel>? get _tasks => _homeService.homeModel;
+  List<HomeModel>? get tasks => _tasks;
 
-  UnmodifiableListView<Task> get tasks {
-    return UnmodifiableListView(_tasks);
-  }
+  // List<HomeModel>? homeModel;
+  // List<HomeModel>? get homeModel => _homeModel;
 
   void addTask(String taskTitle) {
-    final task = Task(name: taskTitle);
-    _tasks.add(task);
-    notifyListeners();
+    setBusy(true);
+    final task = HomeModel(userId: 1, id: 1, name: taskTitle, body: 'body');
+    _tasks!.add(task);
+    setBusy(false);
   }
 
   void removeTask(task) {
-    _tasks.remove(task);
-    notifyListeners();
+    setBusy(true);
+    _tasks!.remove(task);
+    setBusy(false);
   }
 
-  void updateTask(Task task) {
+  void updateTask(HomeModel task) {
+    setBusy(true);
     task.toggleDone();
-    notifyListeners();
+    setBusy(false);
   }
 }
 
