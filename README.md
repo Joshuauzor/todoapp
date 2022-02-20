@@ -1,16 +1,22 @@
-# todo
+# Todo
 
-a todo app
+A Todo application 
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is a todo app that gets initial data from https://jsonplaceholder.typicode.com/users/1/posts
 
-A few resources to get you started if this is your first Flutter project:
+Click here to download an installable APK:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- [Google Drive](https://flutter.dev/docs/get-started/codelab)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## PACKAGES
+All packages used was installed from https://pub.dev/
+
+## App Usage
+- Long press to delete
+- Use the floating action button to add 
+- Check the box to update task
+
+
