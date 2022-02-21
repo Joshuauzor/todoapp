@@ -14,7 +14,7 @@ class SplashViewModel extends BaseModel {
     setBusy(true);
     await Future.delayed(const Duration(seconds: 2));
     await _homeService.getTasks();
-    await Navigator.pushNamed(context, Routes.homeView);
+    await Navigator.pushReplacementNamed(context, Routes.homeView);
     setBusy(false);
   }
 }

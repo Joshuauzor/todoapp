@@ -20,7 +20,7 @@ class _HomeViewState extends State<HomeView> {
       body: ViewModelBuilder<HomeViewModel>.reactive(
         viewModelBuilder: () => HomeViewModel(),
         builder: (context, model, child) {
-          return model.isBusy
+          return model.tasks == null
               ? const Center(
                   child: Loader(),
                 )
